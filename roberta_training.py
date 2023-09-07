@@ -173,7 +173,7 @@ def get_roberta_output(model_roberta, tokenizer, nlu_t, headers, max_seq_length)
 
     # 4. Generate RoBERTa output.
     check, _, all_encoder_layer = model_roberta(input_ids=all_input_ids, attention_mask=all_input_mask, output_hidden_states=True)
-    all_encoder_layer = [x for x in all_encoder_layer]
+    all_encoder_layer = [x.detach().cpu().numpy() for x in all_encoder_layer]
 
     # assert torch.all(torch.eq(check, all_encoder_layer[-1]))
 
